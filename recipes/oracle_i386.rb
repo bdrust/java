@@ -26,6 +26,12 @@ unless node.recipe?('java::default')
   end
 end
 
+app_home = node['java']["java_home"]
+
+if !node['java']['app_home'].nil? and !node['java']['app_home'].empty?
+  app_home = node['java']["app_home"]
+end
+
 java_home = node['java']["java_home"]
 
 case node['java']['jdk_version'].to_s
@@ -54,7 +60,7 @@ java_ark "jdk-alt" do
   url tarball_url
   default node['java']['set_default']
   checksum tarball_checksum
-  app_home java_home
+  app_home app_home
   bin_cmds bin_cmds
   retries node['java']['ark_retries']
   retry_delay node['java']['ark_retries']

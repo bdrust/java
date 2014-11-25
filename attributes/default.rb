@@ -42,6 +42,8 @@ else
   default['java']['install_flavor'] = "openjdk"
 end
 
+default['java']['app_home'] = ''
+
 case node['java']['install_flavor']
 when 'ibm', 'ibm_tar'
   default['java']['ibm']['url'] = nil
